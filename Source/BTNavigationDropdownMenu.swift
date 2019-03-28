@@ -295,10 +295,14 @@ open class BTNavigationDropdownMenu: UIView {
             titleToDisplay = title
         }
 
-        titleSize = (titleToDisplay as NSString).size(withAttributes: [NSAttributedString.Key.font:self.configuration.navigationBarTitleFont])
+        let font = self.configuration.navigationBarTitleFont ?? UIFont.systemFont(ofSize: 17)
+        titleSize = (titleToDisplay as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
 
         // Set frame
-        let frame = CGRect(x: 0, y: 0, width: titleSize.width + (self.configuration.arrowPadding + self.configuration.arrowImage.size.width)*2, height: self.navigationController!.navigationBar.frame.height)
+        let frame = CGRect(x: 0,
+                           y: 0,
+                           width: titleSize.width + (self.configuration.arrowPadding + self.configuration.arrowImage.size.width) * 2,
+                           height: self.navigationController?.navigationBar.frame.height ?? .zero)
 
         super.init(frame:frame)
 
@@ -348,8 +352,8 @@ open class BTNavigationDropdownMenu: UIView {
             guard let selfie = self else {
                 return
             }
-            selfie.didSelectItemAtIndexHandler!(indexPath)
-            if selfie.shouldChangeTitleText! {
+            selfie.didSelectItemAtIndexHandler?(indexPath)
+            if selfie.shouldChangeTitleText {
                 selfie.setMenuTitle("\(selfie.tableView.items[indexPath])")
             }
             self?.hideMenu()
@@ -418,7 +422,7 @@ open class BTNavigationDropdownMenu: UIView {
         self.tableView.selectedIndexPath = index
         self.tableView.reloadData()
 
-        if self.shouldChangeTitleText! {
+        if self.shouldChangeTitleText {
             self.setMenuTitle("\(self.tableView.items[index])")
         }
     }
@@ -436,7 +440,7 @@ open class BTNavigationDropdownMenu: UIView {
         self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
 
         self.isShown = true
-        self.didChangeOpenStatusHandler!(true);
+        self.didChangeOpenStatusHandler?(true);
         
         // Table view header
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 300))
@@ -493,7 +497,7 @@ open class BTNavigationDropdownMenu: UIView {
             animations: {
                 self.tableView.frame.origin.y = CGFloat(-200)
         }, completion: { _ in
-            self.didChangeOpenStatusHandler!(false);
+            self.didChangeOpenStatusHandler?(false);
         }
         )
 
