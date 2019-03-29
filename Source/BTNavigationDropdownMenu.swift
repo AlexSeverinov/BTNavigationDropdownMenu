@@ -27,6 +27,7 @@
 import UIKit
 
 // MARK: BTNavigationDropdownMenu
+@objcMembers
 open class BTNavigationDropdownMenu: UIView {
 
     // The color of menu title. Default is darkGrayColor()
