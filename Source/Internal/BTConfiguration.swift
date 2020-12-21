@@ -68,7 +68,7 @@ final class BTConfiguration {
         self.navigationBarTitleFont = UIFont(name: "HelveticaNeue-Bold", size: 17)
         self.cellTextLabelAlignment = NSTextAlignment.left
         self.cellSelectionColor = UIColor.lightGray
-        self.checkMarkImage = UIImage(contentsOfFile: checkMarkImagePath!)
+        self.checkMarkImage = UIImage(contentsOfFile: checkMarkImagePath ?? "")
         self.shouldKeepSelectedCellColor = false
         self.animationDuration = 0.5
         self.arrowImage = UIImage(contentsOfFile: arrowImagePath!)
